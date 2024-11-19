@@ -71,7 +71,6 @@ async def test_ensure_async():
 @pytest.mark.asyncio
 async def test_get_files_recursive(temp_directory):
     """Test recursive file listing."""
-    breakpoint()  # Debugger will pause here
     files = await get_files_recursive(temp_directory)
     
     # Convert to set of relative paths for easier comparison
