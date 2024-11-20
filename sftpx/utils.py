@@ -2,15 +2,12 @@ import os
 from pathlib import Path
 from typing import List
 import asyncio
-from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 
 async def ensure_async(func, *args, **kwargs):
     """Execute synchronous function in thread pool."""
     loop = asyncio.get_running_loop()
-    with ThreadPoolExecutor() as pool:
-        wrapped_func = partial(func, *args, **kwargs)
-        return await loop.run_in_executor(pool, wrapped_func)
+    return await loop.run_in_executor(None, partial(func, *args, **kwargs))
 
 def normalize_path(path: Path) -> str:
     """Convert Path object to posix-style string path."""
